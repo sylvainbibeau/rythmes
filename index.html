@@ -14,6 +14,12 @@
       --border: #e2e8f0;
       --text: #1e293b;
       --muted: #64748b;
+      --row-white: #ffffff;
+      --row-r1: #f3f4f6;
+      --row-r2: #dbfce7;
+      --row-lt: #fef9c2;
+      --row-r3: #ffeed4;
+      --row-r45: #ffe4e3;
       --z1: #e0f2fe; --z1-t: #0369a1;
       --z2: #dcfce7; --z2-t: #15803d;
       --z3: #fef9c3; --z3-t: #a16207;
@@ -201,13 +207,14 @@
     }
 
     thead th {
-      background: var(--primary);
-      color: #fff;
+      background: var(--row-white);
+      color: var(--primary);
       font-weight: 600;
       text-align: left;
       padding: 11px 12px;
       font-size: 0.82rem;
       white-space: nowrap;
+      border-bottom: 1px solid var(--border);
     }
 
     thead th.num, tbody td.num {
@@ -227,8 +234,25 @@
       border-bottom: none;
     }
 
-    tbody tr.highlight {
-      background: #fff8f8;
+    tbody tr.row-r1 {
+      background: var(--row-r1);
+    }
+
+    tbody tr.row-r2 {
+      background: var(--row-r2);
+    }
+
+    tbody tr.row-lt {
+      background: var(--row-lt);
+    }
+
+    tbody tr.row-r3 {
+      background: var(--row-r3);
+    }
+
+    tbody tr.row-r4,
+    tbody tr.row-r5 {
+      background: var(--row-r45);
     }
 
     tbody td {
@@ -264,7 +288,7 @@
       border-radius: 6px;
     }
 
-    .highlight .code-badge {
+    .row-r2 .code-badge {
       background: var(--accent);
       color: #fff;
     }
@@ -375,7 +399,7 @@
       </div>
 
       <footer id="copyright-footer">
-        &copy; Tarmac Coaching 2018-<span id="current-year"></span> &mdash; Reproduction interdite sans autorisation.
+        &copy; Tarmac Coaching 2018-<span id="current-year"></span> &mdash; Reproduction interdite sans autorisation de l'auteur
       </footer>
     </div>
   </div>
@@ -481,7 +505,7 @@
           paceSec: r1Seconds,
           zone: "Z1",
           zoneClass: "z1",
-          highlight: false
+          rowClass: "row-r1"
         },
         {
           label: isMarathon ? "Endurance Marathon" : "Endurance Demi-marathon",
@@ -490,7 +514,7 @@
           paceSec: r2Seconds,
           zone: "Z2",
           zoneClass: "z2",
-          highlight: true
+          rowClass: "row-r2"
         },
         {
           label: "Endurance Seuil lactique",
@@ -499,7 +523,7 @@
           paceSec: ltSeconds,
           zone: "Z3",
           zoneClass: "z3",
-          highlight: false
+          rowClass: "row-lt"
         },
         {
           label: "Performance 10 km",
@@ -508,7 +532,7 @@
           paceSec: r3Seconds,
           zone: "Z4",
           zoneClass: "z4",
-          highlight: false
+          rowClass: "row-r3"
         },
         {
           label: "Performance 5 km",
@@ -517,7 +541,7 @@
           paceSec: r4Seconds,
           zone: "Z5",
           zoneClass: "z5",
-          highlight: false
+          rowClass: "row-r4"
         },
         {
           label: "VO2max Sprint",
@@ -526,7 +550,7 @@
           paceSec: r5Seconds,
           zone: "Z5",
           zoneClass: "z5",
-          highlight: false
+          rowClass: "row-r5"
         }
       ];
 
@@ -534,7 +558,7 @@
         const kmh = 3600 / row.paceSec;
         const mph = kmh / 1.609344;
         return `
-          <tr class="${row.highlight ? "highlight" : ""}">
+          <tr class="${row.rowClass}">
             <td>
               <span class="zone-title">${row.label}</span>
               ${row.subtime ? `<span class="zone-subtime">${row.subtime}</span>` : ""}
